@@ -17,8 +17,9 @@ class Timing {
 	 * Start a timer.
 	 *
 	 * @param string $name Time name.
+	 * @return void
 	 */
-	public static function start( string $name ): void {
+	public static function start( string $name ) {
 		do_action( 'qm/start', $name ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 
@@ -26,8 +27,9 @@ class Timing {
 	 * Stop a timer.
 	 *
 	 * @param string $name Time name.
+	 * @return void
 	 */
-	public static function stop( string $name ): void {
+	public static function stop( string $name ) {
 		do_action( 'qm/stop', $name ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 
@@ -35,8 +37,9 @@ class Timing {
 	 * Lap a timer
 	 *
 	 * @param string $name Time name.
+	 * @return void
 	 */
-	public static function lap( string $name ): void {
+	public static function lap( string $name ) {
 		do_action( 'qm/lap', $name ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 }
