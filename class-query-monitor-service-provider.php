@@ -24,13 +24,13 @@ class Query_Monitor_Service_Provider extends Service_Provider {
 	/**
 	 * Register the Service Provider
 	 */
-	public function register(): void {
+	public function register() {
 		\add_filter( 'qm/dispatchers', [ $this, 'fix_query_monitor_dispatcher' ], PHP_INT_MAX );
 		\add_filter( 'qm/collectors', [ $this, 'register_collector' ] );
 		\add_filter( 'qm/outputter/html', [ $this, 'output' ], 60, 2 );
 
-		$this->app->booting( fn () => Timing::start( 'Mantle: Booting' ) );
-		$this->app->booted( fn () => Timing::stop( 'Mantle: Booting' ) );
+		$this->app->booting( fn() => Timing::start( 'Mantle: Booting' ) );
+		$this->app->booted( fn() => Timing::stop( 'Mantle: Booting' ) );
 	}
 
 	/**
@@ -51,6 +51,8 @@ class Query_Monitor_Service_Provider extends Service_Provider {
 
 	/**
 	 * Fire the Query Monitor dispatches and return the response.
+	 *
+	 * @return string|null
 	 */
 	public function fire_query_monitor_dispatches(): ?string {
 		if ( empty( $this->query_monitor_dispatches ) ) {
@@ -59,10 +61,10 @@ class Query_Monitor_Service_Provider extends Service_Provider {
 
 		ob_start();
 
-		foreach ( $this->query_monitor_dispatches as $query_monitor_dispatch ) {
+		foreach ( $this->query_monitor_dispatches as $callback ) {
 			// Remove the dispatcher from the 'shutdown' hook.
-			remove_action( 'shutdown', $query_monitor_dispatch, 0 );
-			$query_monitor_dispatch();
+			remove_action( 'shutdown', $callback, 0 );
+			$callback();
 		}
 
 		return (string) ob_get_clean();
