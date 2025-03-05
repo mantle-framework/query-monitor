@@ -39,7 +39,7 @@ class Log_Collector extends \QM_Collector {
 		$this->app = $app;
 
 		$this->app['log']->listen(
-			function( Message_Logged $event ) {
+			function ( Message_Logged $event ): void {
 				$trace = new \QM_Backtrace(
 					[
 						'ignore_frames' => 6,
@@ -60,7 +60,7 @@ class Log_Collector extends \QM_Collector {
 	/**
 	 * Setup the collector data.
 	 */
-	public function process() {
+	public function process(): void {
 		if ( empty( $this->data['logs'] ) ) {
 			return;
 		}
@@ -77,8 +77,6 @@ class Log_Collector extends \QM_Collector {
 
 	/**
 	 * Retrieve log levels.
-	 *
-	 * @return array
 	 */
 	public function get_levels(): array {
 		return Logger::getLevels();
@@ -86,8 +84,6 @@ class Log_Collector extends \QM_Collector {
 
 	/**
 	 * Retrieve warning log levels.
-	 *
-	 * @return array
 	 */
 	public function get_warning_levels(): array {
 		return [
