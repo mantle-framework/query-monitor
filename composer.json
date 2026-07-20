@@ -3,21 +3,19 @@
     "description": "The Mantle Framework Query Monitor Package",
     "type": "library",
     "require": {
-        "php": "^8.2",
-        "alleyinteractive/composer-wordpress-autoloader": "^1.0",
+        "php": "^8.3",
         "mantle-framework/contracts": "^1.0",
         "mantle-framework/database": "^1.0",
         "mantle-framework/http": "^1.0",
+        "mantle-framework/http-client": "^1.0",
         "mantle-framework/log": "^1.0",
         "mantle-framework/support": "^1.0",
         "monolog/monolog": "^2.9.1",
         "psr/log": "^1.0.1 || ^2.0 || ^3.0"
     },
-    "extra": {
-        "wordpress-autoloader": {
-            "autoload": {
-                "Mantle\\Query_Monitor": "./"
-            }
+    "autoload": {
+        "psr-4": {
+            "Mantle\\Query_Monitor\\": "./"
         }
     },
     "license": "GPL-2.0-or-later",
@@ -28,6 +26,9 @@
         }
     ],
     "config": {
+        "allow-plugins": {
+            "alleyinteractive/composer-wordpress-autoloader": true
+        },
         "sort-packages": true
     }
 }
